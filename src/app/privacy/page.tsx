@@ -17,13 +17,22 @@ export const metadata: Metadata = {
     title: 'Privacy Policy | Fegan Digital | AI Automation & Digital Systems | Newry',
     description:
       'How Fegan Digital handles personal information collected from website enquiries and client work. A plain-English summary of what we collect, why, and your rights.',
-    url: '/privacy',
+    url: 'https://fegandigital.com/privacy',
+    images: [
+      {
+        url: 'https://fegandigital.com/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Fegan Digital — AI Automation & Digital Systems',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Privacy Policy | Fegan Digital | AI Automation & Digital Systems | Newry',
     description:
       'How Fegan Digital handles personal information collected from website enquiries and client work. A plain-English summary of what we collect, why, and your rights.',
+    images: ['https://fegandigital.com/opengraph-image'],
   },
 }
 

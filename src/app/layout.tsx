@@ -35,12 +35,21 @@ export const metadata: Metadata = {
     title: 'Fegan Digital | AI Automation & Digital Systems | Newry',
     description:
       'Practical AI automation and digital systems for small businesses. Based in Newry, serving Ireland and the UK.',
+    images: [
+      {
+        url: 'https://fegandigital.com/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Fegan Digital — AI Automation & Digital Systems',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Fegan Digital | AI Automation & Digital Systems | Newry',
     description:
       'Practical AI automation and digital systems for small businesses. Based in Newry, serving Ireland and the UK.',
+    images: ['https://fegandigital.com/opengraph-image'],
   },
   robots: {
     index: true,

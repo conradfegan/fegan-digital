@@ -19,13 +19,22 @@ export const metadata: Metadata = {
     title: 'Contact | Fegan Digital | AI Automation & Digital Systems | Newry',
     description:
       'Book a free 30-minute discovery call with Fegan Digital. No commitment, no sales pitch — just a conversation about your business and whether we can help. Based in Newry.',
-    url: '/contact',
+    url: 'https://fegandigital.com/contact',
+    images: [
+      {
+        url: 'https://fegandigital.com/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Fegan Digital — AI Automation & Digital Systems',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Contact | Fegan Digital | AI Automation & Digital Systems | Newry',
     description:
       'Book a free 30-minute discovery call with Fegan Digital. No commitment, no sales pitch — just a conversation about your business and whether we can help. Based in Newry.',
+    images: ['https://fegandigital.com/opengraph-image'],
   },
 }
 

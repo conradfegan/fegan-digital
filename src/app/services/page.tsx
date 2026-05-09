@@ -19,13 +19,22 @@ export const metadata: Metadata = {
     title: 'Services | Fegan Digital | AI Automation & Digital Systems | Newry',
     description:
       'AI automation, web development, web and mobile apps, and custom software for small businesses in Ireland and the UK. Fixed prices and a clear written process throughout.',
-    url: '/services',
+    url: 'https://fegandigital.com/services',
+    images: [
+      {
+        url: 'https://fegandigital.com/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Fegan Digital — AI Automation & Digital Systems',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Services | Fegan Digital | AI Automation & Digital Systems | Newry',
     description:
       'AI automation, web development, web and mobile apps, and custom software for small businesses in Ireland and the UK. Fixed prices and a clear written process throughout.',
+    images: ['https://fegandigital.com/opengraph-image'],
   },
 }
 
