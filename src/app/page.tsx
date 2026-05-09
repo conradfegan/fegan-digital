@@ -8,9 +8,29 @@ import SectionHeading from '@/components/SectionHeading'
 import { siteConfig } from '@/lib/config'
 
 export const metadata: Metadata = {
-  title: 'Fegan Digital — AI Automation & Digital Systems for Small Businesses',
+  title: {
+    absolute: 'Fegan Digital | AI Automation & Digital Systems | Newry',
+  },
   description:
     'Practical AI automation and digital systems for small businesses that want to stop wasting time on admin. Based in Newry, serving Ireland and the UK.',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    siteName: 'Fegan Digital',
+    title: 'Fegan Digital | AI Automation & Digital Systems | Newry',
+    description:
+      'Practical AI automation and digital systems for small businesses that want to stop wasting time on admin. Based in Newry, serving Ireland and the UK.',
+    url: '/',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fegan Digital | AI Automation & Digital Systems | Newry',
+    description:
+      'Practical AI automation and digital systems for small businesses that want to stop wasting time on admin. Based in Newry, serving Ireland and the UK.',
+  },
 }
 
 const trustSignals = [

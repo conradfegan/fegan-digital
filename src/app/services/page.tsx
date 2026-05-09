@@ -8,7 +8,25 @@ import { siteConfig } from '@/lib/config'
 export const metadata: Metadata = {
   title: 'Services',
   description:
-    'AI automation, web development, web and mobile app development, and custom software for small businesses in Ireland and the UK.',
+    'AI automation, web development, web and mobile apps, and custom software for small businesses in Ireland and the UK. Fixed prices and a clear written process throughout.',
+  alternates: {
+    canonical: '/services',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    siteName: 'Fegan Digital',
+    title: 'Services | Fegan Digital | AI Automation & Digital Systems | Newry',
+    description:
+      'AI automation, web development, web and mobile apps, and custom software for small businesses in Ireland and the UK. Fixed prices and a clear written process throughout.',
+    url: '/services',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Services | Fegan Digital | AI Automation & Digital Systems | Newry',
+    description:
+      'AI automation, web development, web and mobile apps, and custom software for small businesses in Ireland and the UK. Fixed prices and a clear written process throughout.',
+  },
 }
 
 const automationExamples = [

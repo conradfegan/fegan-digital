@@ -22,8 +22,8 @@ const baseUrl = 'https://fegandigital.com'
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Fegan Digital — AI Automation & Digital Systems for Small Businesses',
-    template: '%s | Fegan Digital',
+    default: 'Fegan Digital | AI Automation & Digital Systems | Newry',
+    template: '%s | Fegan Digital | AI Automation & Digital Systems | Newry',
   },
   description:
     'Practical AI automation and digital systems for small businesses. Cut admin, recover revenue, and run more efficiently. Based in Newry, serving Ireland and the UK.',
@@ -32,13 +32,13 @@ export const metadata: Metadata = {
     locale: 'en_GB',
     url: baseUrl,
     siteName: 'Fegan Digital',
-    title: 'Fegan Digital — AI Automation & Digital Systems for Small Businesses',
+    title: 'Fegan Digital | AI Automation & Digital Systems | Newry',
     description:
       'Practical AI automation and digital systems for small businesses. Based in Newry, serving Ireland and the UK.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fegan Digital — AI Automation & Digital Systems for Small Businesses',
+    title: 'Fegan Digital | AI Automation & Digital Systems | Newry',
     description:
       'Practical AI automation and digital systems for small businesses. Based in Newry, serving Ireland and the UK.',
   },

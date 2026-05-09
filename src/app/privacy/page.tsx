@@ -4,9 +4,27 @@ import Reveal from '@/components/Reveal'
 import { siteConfig } from '@/lib/config'
 
 export const metadata: Metadata = {
-  title: 'Privacy',
+  title: 'Privacy Policy',
   description:
-    'How Fegan Digital handles personal information from website enquiries and client work.',
+    'How Fegan Digital handles personal information collected from website enquiries and client work. A plain-English summary of what we collect, why, and your rights.',
+  alternates: {
+    canonical: '/privacy',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    siteName: 'Fegan Digital',
+    title: 'Privacy Policy | Fegan Digital | AI Automation & Digital Systems | Newry',
+    description:
+      'How Fegan Digital handles personal information collected from website enquiries and client work. A plain-English summary of what we collect, why, and your rights.',
+    url: '/privacy',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Privacy Policy | Fegan Digital | AI Automation & Digital Systems | Newry',
+    description:
+      'How Fegan Digital handles personal information collected from website enquiries and client work. A plain-English summary of what we collect, why, and your rights.',
+  },
 }
 
 export default function PrivacyPage() {

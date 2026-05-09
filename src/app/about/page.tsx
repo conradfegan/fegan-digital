@@ -7,9 +7,27 @@ import SectionHeading from '@/components/SectionHeading'
 import { siteConfig } from '@/lib/config'
 
 export const metadata: Metadata = {
-  title: 'About',
+  title: 'About Us',
   description:
-    'Fegan Digital is founder-led by Conrad Fegan, based in Newry. Practical AI automation and digital systems for businesses in Ireland and the UK.',
+    'Fegan Digital is founder-led by Conrad Fegan, based in Newry. AI automation and digital systems built for small businesses across Ireland and the UK — from first call to final delivery.',
+  alternates: {
+    canonical: '/about',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    siteName: 'Fegan Digital',
+    title: 'About Us | Fegan Digital | AI Automation & Digital Systems | Newry',
+    description:
+      'Fegan Digital is founder-led by Conrad Fegan, based in Newry. AI automation and digital systems built for small businesses across Ireland and the UK — from first call to final delivery.',
+    url: '/about',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Us | Fegan Digital | AI Automation & Digital Systems | Newry',
+    description:
+      'Fegan Digital is founder-led by Conrad Fegan, based in Newry. AI automation and digital systems built for small businesses across Ireland and the UK — from first call to final delivery.',
+  },
 }
 
 const values = [

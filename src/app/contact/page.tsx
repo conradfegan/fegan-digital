@@ -8,7 +8,25 @@ import { siteConfig } from '@/lib/config'
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    'Book a free 30-minute discovery call with Fegan Digital. Based in Newry, serving businesses across Ireland and the UK.',
+    'Book a free 30-minute discovery call with Fegan Digital. No commitment, no sales pitch — just a conversation about your business and whether we can help. Based in Newry.',
+  alternates: {
+    canonical: '/contact',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_GB',
+    siteName: 'Fegan Digital',
+    title: 'Contact | Fegan Digital | AI Automation & Digital Systems | Newry',
+    description:
+      'Book a free 30-minute discovery call with Fegan Digital. No commitment, no sales pitch — just a conversation about your business and whether we can help. Based in Newry.',
+    url: '/contact',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact | Fegan Digital | AI Automation & Digital Systems | Newry',
+    description:
+      'Book a free 30-minute discovery call with Fegan Digital. No commitment, no sales pitch — just a conversation about your business and whether we can help. Based in Newry.',
+  },
 }
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
