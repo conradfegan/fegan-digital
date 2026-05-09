@@ -486,7 +486,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <Reveal className="rounded-lg overflow-hidden bg-surface-alt border border-border w-4/5 mx-auto md:mx-0">
               <Image
-                src="/images/conrad-fegan.jpg"
+                src="/images/conrad-photo-black.jpeg"
                 alt="Conrad Fegan, founder of Fegan Digital"
                 width={480}
                 height={400}
