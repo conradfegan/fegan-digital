@@ -26,9 +26,9 @@ export const healthMattersFlow: FlowStep[] = [
   { label: 'Accounts' },
 ]
 
-export const eastBorderFlow: FlowStep[] = [
+export const publicSectorFlow: FlowStep[] = [
   { label: 'Request', detail: 'Annual leave, time in lieu or mileage' },
   { label: 'Manager approval', detail: 'Replacing paper and email' },
   { label: 'Logged', detail: 'One system for requests and approvals' },
-  { label: 'Project coded', detail: 'Mileage coded to the right EU-funded project' },
+  { label: 'Project coded', detail: 'Mileage coded to the right funded project' },
 ]

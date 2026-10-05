@@ -8,15 +8,15 @@ import SystemFlow from '@/components/SystemFlow'
 import ApprovalMark from '@/components/ApprovalMark'
 import CtaBand from '@/components/CtaBand'
 import Reveal from '@/components/Reveal'
-import ClientLogo from '@/components/ClientLogo'
+import ClientLogo, { type ClientLogoName } from '@/components/ClientLogo'
 import { pageMetadata } from '@/lib/metadata'
-import { eastBorderFlow, healthMattersFlow, healthMattersQuotes } from '@/lib/work'
+import { healthMattersFlow, healthMattersQuotes, publicSectorFlow } from '@/lib/work'
 
 export const metadata: Metadata = pageMetadata({
   title: { absolute: 'Our Work | Fegan Digital' },
   socialTitle: 'Our Work | Fegan Digital',
   description:
-    'Systems Fegan Digital has built for businesses and organisations, including a booking and invoicing system for Health Matters and a leave and mileage system for East Border Region.',
+    'Systems Fegan Digital has built for businesses and organisations, including a booking and invoicing system for Health Matters and a leave and mileage system for a regional public-sector partnership.',
   path: '/work',
 })
 
@@ -40,17 +40,18 @@ const projects = [
     project: 'Booking and invoicing system',
     status: 'live' as const,
     statusLabel: 'In daily use',
-    logo: 'health-matters' as const,
+    logo: 'health-matters' as ClientLogoName | null,
     logoHeight: 34,
   },
   {
-    href: '#east-border-region',
-    client: 'East Border Region Ltd',
+    // The client is not named until the project is complete, so there is no logo.
+    href: '#public-sector-project',
+    client: 'A regional public-sector partnership',
     project: 'Leave, time in lieu and mileage system',
     status: 'building' as const,
     statusLabel: 'Currently building',
-    logo: 'east-border-region' as const,
-    logoHeight: 52,
+    logo: null,
+    logoHeight: 0,
   },
 ]
 
@@ -82,10 +83,12 @@ export default function WorkPage() {
                   href={p.href}
                   className="index-row group flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 focus-visible:outline-offset-0"
                 >
-                  <span className="index-row-label flex items-center gap-4">
-                    <span className="flex h-16 w-20 flex-shrink-0 items-center justify-center rounded-lg bg-white ring-1 ring-white/10">
-                      <ClientLogo name={p.logo} height={p.logoHeight} />
-                    </span>
+                  <span className={`index-row-label flex items-center gap-4 ${p.logo ? '' : 'sm:pl-24'}`}>
+                    {p.logo && (
+                      <span className="flex h-16 w-20 flex-shrink-0 items-center justify-center rounded-lg bg-white ring-1 ring-white/10">
+                        <ClientLogo name={p.logo} height={p.logoHeight} />
+                      </span>
+                    )}
                     <span>
                       <span className="block text-lg font-semibold text-white transition-colors group-hover:text-accent-on-dark">
                         {p.client}
@@ -217,10 +220,11 @@ export default function WorkPage() {
         </Container>
       </section>
 
-      {/* ── Current project: East Border Region (a dark draft, so no results) ── */}
+      {/* ── Current project: a regional public-sector partnership (a dark draft, so no results).
+          The client is not named until the project is complete. ── */}
       <section
-        id="east-border-region"
-        aria-labelledby="east-border-region-heading"
+        id="public-sector-project"
+        aria-labelledby="public-sector-project-heading"
         className="glow scroll-mt-4 bg-pitch pb-16 sm:pb-20 lg:pb-24"
       >
         <Container>
@@ -233,27 +237,23 @@ export default function WorkPage() {
                     <span className="text-sm font-medium text-white/60">Current project</span>
                   </div>
                   <h2
-                    id="east-border-region-heading"
+                    id="public-sector-project-heading"
                     className="mt-6 text-[2rem] sm:text-[2.75rem] lg:text-5xl font-semibold leading-[1.05] tracking-[-0.035em] text-white"
                   >
-                    East Border Region Ltd
+                    A regional public-sector partnership
                   </h2>
                   <p className="mt-3 text-lg sm:text-xl font-semibold text-accent-on-dark">
                     Leave, time in lieu and mileage system
                   </p>
                 </div>
-                <div className="justify-self-start">
-                  <span className="block md:hidden"><ClientLogo name="east-border-region" height={96} plate /></span>
-                  <span className="hidden md:block md:mt-1"><ClientLogo name="east-border-region" height={128} plate /></span>
-                </div>
               </header>
 
               <div className="grid gap-10 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14 lg:px-14 lg:py-14">
                 <p className="text-lg leading-relaxed text-white/75 max-w-[42rem]">
-                  East Border Region is a cross-border partnership serving six local authorities. Its team managed annual leave, time in lieu and mileage claims on paper and by email. We are replacing that with one system for requests and approvals, with mileage coded to the right EU-funded project. It runs on the Microsoft 365 the organisation already has and will be handed over with full documentation.
+                  This project is for a regional public-sector partnership. The organisation manages annual leave, time in lieu and mileage claims using paper and email. We are replacing that with one system for requests and approvals, with mileage coded to the right funded project. It runs on the Microsoft 365 the organisation already has and will be handed over with full documentation.
                 </p>
                 <SystemFlow
-                  steps={eastBorderFlow}
+                  steps={publicSectorFlow}
                   state="planned"
                   caption="Schematic: how a request will move through the system once it is built."
                 />

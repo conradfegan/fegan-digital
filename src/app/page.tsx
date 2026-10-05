@@ -14,7 +14,7 @@ import CtaBand from '@/components/CtaBand'
 import LinkedInLink from '@/components/LinkedInLink'
 import { siteConfig } from '@/lib/config'
 import { defaultTitle, pageMetadata } from '@/lib/metadata'
-import { eastBorderFlow, healthMattersFlow, healthMattersQuotes } from '@/lib/work'
+import { healthMattersFlow, healthMattersQuotes, publicSectorFlow } from '@/lib/work'
 
 export const metadata: Metadata = pageMetadata({
   title: { absolute: defaultTitle },
@@ -243,29 +243,29 @@ export default function HomePage() {
           </article>
         </Reveal>
 
-        {/* East Border Region: still being built, so drawn as a dark draft. */}
+        {/* The current public-sector project: still being built, so drawn as a dark draft.
+            The client is not named until the project is complete. */}
         <Reveal delay={80}>
           <article className="panel-draft card-motion card-motion-dark mt-6 rounded-2xl grid xl:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
             <div className="p-6 sm:p-10">
               <div className="flex items-start justify-between gap-6">
                 <StatusBadge status="building">Currently building</StatusBadge>
-                <ClientLogo name="east-border-region" height={92} plate />
               </div>
               <h3 className="mt-6 text-2xl sm:text-[1.75rem] font-semibold leading-tight tracking-[-0.02em] text-white">
-                East Border Region Ltd
+                Regional public-sector partnership
               </h3>
               <p className="mt-1.5 font-semibold text-accent-on-dark">Leave, time in lieu and mileage system</p>
               <p className="mt-4 leading-relaxed text-white/70">
-                Replacing paper and email admin with one system for requests and approvals, for a cross-border partnership serving six local authorities.
+                Replacing paper and email admin with one system for requests and approvals, for a regional public-sector partnership.
               </p>
-              <Link href="/work#east-border-region" className={`${docLink} link-mark mt-5 text-white`}>
+              <Link href="/work#public-sector-project" className={`${docLink} link-mark mt-5 text-white`}>
                 See the project
                 <Arrow />
               </Link>
             </div>
             <div className="hidden md:block border-t border-dashed border-accent-on-dark/30 p-6 sm:p-10 xl:border-t-0 xl:border-l">
               <SystemFlow
-                steps={eastBorderFlow}
+                steps={publicSectorFlow}
                 state="planned"
                 compact
                 caption="Schematic: how a request will move through the system."

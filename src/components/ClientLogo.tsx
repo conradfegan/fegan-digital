@@ -18,13 +18,6 @@ const logos = {
     height: 1024,
     crop: { x: 128, y: 177, w: 1287, h: 769 },
   },
-  'east-border-region': {
-    src: '/client-logos/East_Border_Region_transparent.svg',
-    alt: 'East Border Region logo',
-    width: 324,
-    height: 533,
-    crop: { x: 14, y: 10, w: 300, h: 513 },
-  },
 } as const
 
 export type ClientLogoName = keyof typeof logos
