@@ -17,20 +17,20 @@ export const metadata: Metadata = pageMetadata({
 
 const approach = [
   {
-    title: 'Bespoke, not off the shelf.',
-    text: 'Built around how your business actually operates. No software licences to sell.',
-  },
-  {
     title: 'Discovery first.',
-    text: 'We sit with your team, then give you written recommendations with time and revenue estimates and fixed prices. Nothing is built until you say yes.',
+    text: 'We sit with your team, understand the work, then give written recommendations and fixed prices.',
   },
   {
-    title: 'Built to last.',
-    text: 'Established, maintainable tools, not experimental technology.',
+    title: 'Built around your process.',
+    text: 'No off-the-shelf software licences to push.',
+  },
+  {
+    title: 'Clean handover.',
+    text: 'Built, tested, documented and explained before it goes live.',
   },
 ]
 
-// All nine automation ideas, grouped so the list scans quickly.
+// Common automation projects, grouped so the list scans quickly.
 const automationGroups = [
   {
     title: 'Reminders and follow-ups',
@@ -56,22 +56,6 @@ const automationGroups = [
       'An end to copy-paste admin',
     ],
   },
-]
-
-const whatYouGet = [
-  { title: 'A working system', text: 'built, tested and live' },
-  { title: 'Written documentation', text: 'what was built and why' },
-  { title: 'A clean handover', text: 'no guessing how it works' },
-  { title: 'Ongoing support', text: 'optional, to maintain and improve it' },
-]
-
-const outcomes = [
-  'Less staff time on admin that could run itself',
-  'Fewer missed renewals and follow-ups',
-  'Fewer manual data entry errors',
-  'Reliable follow-up without anyone remembering',
-  'Clearer visibility through automated reports',
-  'More time for work that needs a person',
 ]
 
 function CheckIcon() {
@@ -117,6 +101,7 @@ export default function ServicesPage() {
               <p className="mb-8 border-l-2 border-accent pl-4 text-ink font-medium leading-relaxed">
                 We start with the tools you already have, and only recommend something new when it earns its place.
               </p>
+              <h3 className={listHeading}>How we approach it</h3>
               <ul className="space-y-4">
                 {approach.map((point) => (
                   <li key={point.title} className="flex items-start gap-3 leading-relaxed">
@@ -127,67 +112,44 @@ export default function ServicesPage() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-10">
-                <Button href="/contact?service=automation" size="md" className="w-full sm:w-auto">
+              <div className="mt-10 hidden lg:block">
+                <Button href="/contact?service=automation" size="md">
                   Discuss an automation project
                 </Button>
               </div>
             </Reveal>
 
-            {/* Right: what can be automated, what you get, what to expect */}
-            <div className="lg:col-span-3 space-y-10">
-              <div>
-                <Reveal>
-                  <h3 className={listHeading}>What can be automated</h3>
-                </Reveal>
-                <ul className="grid md:grid-cols-3 gap-4">
-                  {automationGroups.map((group, i) => (
-                    <Reveal
-                      as="li"
-                      key={group.title}
-                      delay={i * 70}
-                      className="card-motion card-motion-light rounded-xl border border-border bg-white p-5"
-                    >
-                      <h4 className="font-semibold text-ink text-sm mb-3">{group.title}</h4>
-                      <ul className="space-y-2">
-                        {group.items.map((item) => (
-                          <li key={item} className="flex items-start gap-2 text-sm text-ink-muted leading-snug">
-                            <span className="mt-[7px] w-1 h-1 rounded-full bg-accent flex-shrink-0" aria-hidden="true" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </Reveal>
-                  ))}
-                </ul>
-              </div>
-
-              <Reveal className="grid sm:grid-cols-2 gap-10 border-t border-border pt-10">
-                <div>
-                  <h3 className={listHeading}>What you get</h3>
-                  <ul className="space-y-2.5">
-                    {whatYouGet.map((item) => (
-                      <li key={item.title} className="flex items-start gap-2.5 text-sm leading-snug">
-                        <CheckIcon />
-                        <span className="text-ink-muted">
-                          <span className="font-semibold text-ink">{item.title}</span>, {item.text}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h3 className={listHeading}>What you can expect</h3>
-                  <ul className="space-y-2.5">
-                    {outcomes.map((o) => (
-                      <li key={o} className="flex items-start gap-2.5 text-sm text-ink-muted leading-snug">
-                        <CheckIcon />
-                        {o}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            {/* Right: common automation projects */}
+            <div className="lg:col-span-3">
+              <Reveal>
+                <h3 className={listHeading}>Common automation projects</h3>
               </Reveal>
+              <ul className="grid md:grid-cols-3 gap-4">
+                {automationGroups.map((group, i) => (
+                  <Reveal
+                    as="li"
+                    key={group.title}
+                    delay={i * 70}
+                    className="card-motion card-motion-light rounded-xl border border-border bg-white p-5"
+                  >
+                    <h4 className="font-semibold text-ink text-sm mb-3">{group.title}</h4>
+                    <ul className="space-y-2">
+                      {group.items.map((item) => (
+                        <li key={item} className="flex items-start gap-2 text-sm text-ink-muted leading-snug">
+                          <span className="mt-[7px] w-1 h-1 rounded-full bg-accent flex-shrink-0" aria-hidden="true" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </Reveal>
+                ))}
+              </ul>
+              {/* On smaller screens the CTA follows the project list. */}
+              <div className="mt-8 lg:hidden">
+                <Button href="/contact?service=automation" size="md" className="w-full sm:w-auto">
+                  Discuss an automation project
+                </Button>
+              </div>
             </div>
 
           </div>
