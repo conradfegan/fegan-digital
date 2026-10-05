@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import Container from '@/components/Container'
 import PageHeader from '@/components/PageHeader'
 import { LinkedInIcon } from '@/components/LinkedInLink'
-import Reveal from '@/components/Reveal'
-import SectionHeading from '@/components/SectionHeading'
 import ContactForm from '@/components/ContactForm'
+import Reveal from '@/components/Reveal'
 import { siteConfig } from '@/lib/config'
 import { pageMetadata } from '@/lib/metadata'
 
@@ -68,48 +67,47 @@ export default async function ContactPage({
       />
 
       {/* ── Main contact section ── */}
-      <section className="py-20 md:py-28">
+      <section className="glow border-t border-white/10 bg-pitch py-14 sm:py-16 lg:py-20">
         <Container>
-          <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-16">
 
-            {/* Left: form */}
-            <Reveal className="lg:col-span-3">
-              <SectionHeading
-                label="Get in touch"
-                title="Send a message."
-                subtitle="Fill in the form below and we'll be back to you within one working day."
-              />
+            {/* Left: the form, on a white sheet */}
+            <Reveal className="sheet tone-light rounded-2xl p-6 sm:p-10 self-start">
+              <h2 className="text-[1.75rem] sm:text-[2rem] font-semibold leading-tight tracking-[-0.025em] text-ink">
+                Send a message.
+              </h2>
+              <p className="mt-2 mb-8 text-lg leading-relaxed text-ink-muted">
+                Fill in the form below and we&apos;ll be back to you within one working day.
+              </p>
               <ContactForm initialService={typeof service === 'string' ? service : undefined} />
             </Reveal>
 
             {/* Right: details + process */}
-            <aside className="lg:col-span-2 space-y-10">
+            <Reveal as="aside" delay={120} className="space-y-12">
 
               {/* Contact details */}
-              <Reveal delay={140} className="rounded-xl border border-border bg-white p-6 sm:p-7">
-                <h2 className="text-xs font-semibold uppercase tracking-widest text-ink-muted mb-5">
-                  Contact details
-                </h2>
-                <dl className="space-y-4">
+              <div>
+                <h2 className="text-base font-semibold text-white">Contact details</h2>
+                <dl className="mt-3 border-t-2 border-accent">
                   {contactDetails.map(({ label, value, href, external }) => (
-                    <div key={label}>
-                      <dt className="text-xs text-ink-muted mb-0.5">{label}</dt>
-                      <dd className="text-sm font-medium text-ink">
+                    <div key={label} className="border-b border-white/10 py-3">
+                      <dt className="text-sm text-white/55">{label}</dt>
+                      <dd className="text-[0.9375rem] font-medium text-white break-words">
                         {href && external ? (
                           <a
                             href={href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="link-soft -my-3 inline-flex min-h-11 items-center gap-2 hover:text-accent"
+                            className="link-soft -my-3 inline-flex min-h-11 items-center gap-2 hover:text-accent-on-dark"
                           >
-                            <LinkedInIcon className="w-4 h-4 text-accent" />
+                            <LinkedInIcon className="w-4 h-4 text-accent-on-dark" />
                             {value}
                             <span className="sr-only"> on LinkedIn (opens in a new tab)</span>
                           </a>
                         ) : href ? (
                           <a
                             href={href}
-                            className="link-soft -my-3 inline-flex min-h-11 items-center hover:text-accent"
+                            className="link-soft -my-3 inline-flex min-h-11 items-center hover:text-accent-on-dark"
                           >
                             {value}
                           </a>
@@ -120,7 +118,7 @@ export default async function ContactPage({
                     </div>
                   ))}
                 </dl>
-              </Reveal>
+              </div>
 
               {/*
                * BOOKING WIDGET: hidden until a real Calendly link exists.
@@ -149,31 +147,27 @@ export default async function ContactPage({
                * Until then, the contact form and email above are the booking surface.
                */}
 
-              {/* What happens next */}
-              <Reveal delay={220}>
-                <h2 className="text-xs font-semibold uppercase tracking-widest text-ink-muted mb-5">
-                  What happens after you enquire
-                </h2>
-                <ol className="space-y-4">
+              {/* What happens next: a real sequence, so numbered */}
+              <div>
+                <h2 className="text-base font-semibold text-white">What happens after you enquire</h2>
+                <ol className="mt-3 border-t-2 border-accent">
                   {whatHappensNext.map((step, i) => (
-                    <Reveal
-                      as="li"
+                    <li
                       key={i}
-                      delay={260 + i * 70}
-                      className="flex items-start gap-3 text-sm text-ink-muted leading-relaxed"
+                      className="flex items-start gap-4 border-b border-white/10 py-4 leading-relaxed text-white/70"
                     >
                       <span
-                        className="flex-shrink-0 w-5 h-5 rounded-full bg-accent-light text-accent text-xs font-semibold flex items-center justify-center mt-0.5"
+                        className="flex-shrink-0 w-6 text-sm font-semibold text-accent-on-dark pt-0.5"
                         aria-hidden="true"
                       >
-                        {i + 1}
+                        {i + 1}.
                       </span>
                       {step}
-                    </Reveal>
+                    </li>
                   ))}
                 </ol>
-              </Reveal>
-            </aside>
+              </div>
+            </Reveal>
           </div>
         </Container>
       </section>

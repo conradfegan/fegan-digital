@@ -1,20 +1,14 @@
 import type { Metadata } from 'next'
-import { Geist } from 'next/font/google'
-import { Inter } from 'next/font/google'
+import { Schibsted_Grotesk } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { siteConfig } from '@/lib/config'
 import { defaultTitle, ogImageAlt } from '@/lib/metadata'
 
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
-  display: 'swap',
-})
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+/* One grotesk family for headings, interface and body copy. */
+const grotesk = Schibsted_Grotesk({
+  variable: '--font-grotesk',
   subsets: ['latin'],
   display: 'swap',
 })
@@ -65,9 +59,9 @@ export default function RootLayout({
   return (
     <html
       lang="en-GB"
-      className={`${inter.variable} ${geistSans.variable}`}
+      className={grotesk.variable}
     >
-      <body className="flex flex-col min-h-screen bg-surface text-ink antialiased">
+      <body className="flex flex-col min-h-screen bg-pitch text-white antialiased">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

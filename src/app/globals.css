@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
-/* ─── Brand colours ──────────────────────────────────────────────────────────
-   Final brand accent: #6633ff (Fegan Digital purple).
-   To update the accent across the entire site, change only these three values.
+/* ─── Brand ──────────────────────────────────────────────────────────────────
+   Fegan Digital: near-black, confident purple, and selected light surfaces
+   where reading or a client logo genuinely needs them.
    ─────────────────────────────────────────────────────────────────────────── */
 :root {
   --brand-accent: #6633ff;
   --brand-accent-hover: #5522ee;
   --brand-accent-light: #ede8ff;
+  --brand-accent-soft: #a88bff;
 
-  /* Motion tokens: tuned for a sleek, professional, SaaS-grade feel. */
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
@@ -18,30 +18,35 @@
   --duration-reveal: 700ms;
 }
 
-/* ─── Tailwind v4 theme tokens ───────────────────────────────────────────── */
 @theme inline {
-  /* Accent: driven by :root variables above. Fallbacks ensure colour resolves
-     even if the var() chain has an unexpected cascade issue in the browser. */
   --color-accent: var(--brand-accent, #6633ff);
   --color-accent-hover: var(--brand-accent-hover, #5522ee);
   --color-accent-light: var(--brand-accent-light, #ede8ff);
-  /* Lighter purple for small text on the near-black background. The brand
-     purple alone is 3.2:1 on pitch, which fails WCAG AA for body text. */
-  --color-accent-on-dark: #a88bff;
+  /* Lighter purple for small text and marks on near-black (brand purple is
+     only 3.2:1 there; this is 7:1). */
+  --color-accent-on-dark: var(--brand-accent-soft, #a88bff);
 
-  /* Neutrals */
-  --color-surface: #f9fafb;
-  --color-surface-alt: #f1f3f5;
-  --color-border: #e5e7eb;
-  --color-ink: #111827;
-  /* Both muted tones meet WCAG AA (4.5:1) on white and surface-alt. */
-  --color-ink-muted: #4b5563;
-  --color-ink-subtle: #6b7280;
+  /* Dark */
   --color-pitch: #0d0d0c;
+  --color-pitch-2: #131218;
+  --color-pitch-3: #1a1922;
 
-  /* Fonts: mapped from Next.js font variables */
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-geist-sans);
+  /* Light surfaces and their ink */
+  --color-paper: #f5f5f8;
+  --color-sheet: #ffffff;
+  --color-ink: #16151f;
+  --color-ink-muted: #4f4e5c;
+  --color-ink-subtle: #6b6a78;
+  --color-rule: #dddce6;
+  --color-rule-strong: #b8b6c6;
+
+  /* Aliases kept for existing components (contact form, success state). */
+  --color-surface: #f5f5f8;
+  --color-surface-alt: #eeeef3;
+  --color-border: #dddce6;
+
+  --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ─── Base ───────────────────────────────────────────────────────────────── */
@@ -49,49 +54,106 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Visible keyboard focus everywhere. Components that draw their own ring
-   (buttons, inputs) opt out with focus-visible:outline-none. Kept in the
-   base layer so Tailwind utilities can override it. */
+body {
+  background-color: var(--color-pitch);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--brand-accent);
+  color: #ffffff;
+}
+
 @layer base {
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+
+  /* Visible keyboard focus everywhere. Purple-soft on dark, purple on light.
+     Components that draw their own ring opt out with focus-visible:outline-none. */
   :focus-visible {
-    outline: 2px solid var(--brand-accent);
+    outline: 2px solid var(--brand-accent-soft);
     outline-offset: 3px;
     border-radius: 4px;
   }
-  .bg-pitch :focus-visible,
+  .tone-light :focus-visible {
+    outline-color: var(--brand-accent);
+  }
   .bg-accent :focus-visible {
     outline-color: #ffffff;
   }
 }
 
-body {
-  background-color: var(--color-surface);
-  color: var(--color-ink);
-  font-family: var(--font-sans), system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ─── Surfaces ───────────────────────────────────────────────────────────── */
+
+/* Purple glow behind dark sections: two soft radial washes. Decorative only. */
+.glow {
+  position: relative;
+  isolation: isolate;
+}
+.glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 55% at 82% 18%, rgba(102, 51, 255, 0.22), transparent 70%),
+    radial-gradient(40% 45% at 8% 92%, rgba(102, 51, 255, 0.12), transparent 70%);
+}
+.glow-drift::before {
+  animation: feganGlowDrift 18s var(--ease-in-out-soft) infinite alternate;
+}
+@keyframes feganGlowDrift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-3%, 2%, 0) scale(1.06); }
 }
 
-/* ─── Motion primitives ───────────────────────────────────────────────────
-   All custom animations live here. Rules:
-     • Only animate transform + opacity (compositor-only, no layout thrash).
-     • Every animated state is opt-in via a class or data attribute, so the
-       baseline page is fully static and SSR-safe.
-     • prefers-reduced-motion neutralises everything at the bottom of the file.
-   ────────────────────────────────────────────────────────────────────────── */
+/* Faint technical grid for hero areas. */
+.grid-lines {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 70% at 60% 30%, #000 30%, transparent 85%);
+}
 
-/* Reveal-on-scroll primitive.
-   The <Reveal> client component renders elements with [data-reveal] and
-   sets data-revealed="true" once the element enters the viewport.
-   Authors stagger by passing a `delay` prop, which sets --reveal-delay. */
+/* Dark glass panel: the default card on near-black. */
+.panel {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+/* A draft panel: dashed edge for work that is still being built. */
+.panel-draft {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px dashed rgba(168, 139, 255, 0.45);
+}
+/* A light document sheet on a dark page: used for reports, forms and logos. */
+.sheet {
+  background: var(--color-sheet);
+  color: var(--color-ink);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(102, 51, 255, 0.06),
+    0 30px 80px -40px rgba(102, 51, 255, 0.45),
+    0 20px 40px -28px rgba(0, 0, 0, 0.6);
+}
+
+/* ─── Reveal on scroll ───────────────────────────────────────────────────────
+   <Reveal> sets data-revealed="true" when the element enters the viewport.
+   Only transform and opacity animate. */
 [data-reveal] {
   opacity: 0;
-  transform: translate3d(0, 14px, 0);
+  transform: translate3d(0, 16px, 0);
   transition:
     opacity var(--duration-reveal) var(--ease-out-quint),
     transform var(--duration-reveal) var(--ease-out-quint);
   transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform;
 }
 [data-reveal][data-revealed="true"] {
   opacity: 1;
@@ -101,7 +163,72 @@ body {
   transform: none;
 }
 
-/* Button: subtle lift on hover, snappy press. Used by all variants. */
+/* ─── Links ──────────────────────────────────────────────────────────────── */
+
+/* Primary nav: a purple rule slides in under the hovered or current page. */
+.nav-link {
+  position: relative;
+  transition: color var(--duration-micro) ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--brand-accent);
+  box-shadow: 0 0 12px rgba(102, 51, 255, 0.8);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--duration-base) var(--ease-out-quint);
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after,
+.nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+/* Footer and body links: the underline hugs the text even in a 44px tap target. */
+.link-soft {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-decoration-color: transparent;
+  transition:
+    color var(--duration-micro) ease,
+    text-decoration-color var(--duration-base) var(--ease-out-quint);
+}
+.link-soft:hover,
+.link-soft:focus-visible {
+  text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+}
+
+/* Text link with a purple underline that thickens on hover, plus an arrow nudge. */
+.link-mark {
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+  text-decoration-color: color-mix(in srgb, var(--brand-accent) 55%, transparent);
+  transition:
+    color var(--duration-micro) ease,
+    text-decoration-color var(--duration-micro) ease;
+}
+.link-mark:hover {
+  text-decoration-color: var(--brand-accent);
+}
+.link-arrow {
+  display: inline-block;
+  transition: transform var(--duration-base) var(--ease-out-quint);
+}
+.group:hover .link-arrow,
+.group:focus-visible .link-arrow,
+a:hover > .link-arrow {
+  transform: translateX(4px);
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────────────── */
 .btn-motion {
   transition:
     transform var(--duration-micro) var(--ease-out-quint),
@@ -117,54 +244,17 @@ body {
   transform: translateY(0);
   transition-duration: 80ms;
 }
+.btn-motion-primary {
+  box-shadow: 0 8px 24px -12px rgba(102, 51, 255, 0.65);
+}
 .btn-motion-primary:hover {
-  box-shadow: 0 8px 22px -10px rgba(102, 51, 255, 0.55);
+  box-shadow: 0 14px 34px -12px rgba(102, 51, 255, 0.85);
 }
 .btn-motion-light:hover {
-  box-shadow: 0 8px 22px -10px rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 26px -12px rgba(255, 255, 255, 0.35);
 }
 
-/* Animated underline for nav links: purple accent slides in from the left. */
-.nav-link {
-  position: relative;
-  transition: color var(--duration-micro) ease;
-}
-.nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 6px;
-  height: 1px;
-  background: var(--brand-accent);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform var(--duration-base) var(--ease-out-quint);
-}
-.nav-link:hover::after,
-.nav-link:focus-visible::after,
-.nav-link[aria-current="page"]::after {
-  transform: scaleX(1);
-}
-
-/* Subtle hover for footer + body links that aren't full nav items.
-   Uses text-decoration so the underline hugs the text even when the link
-   box is padded out to a 44px tap target. */
-.link-soft {
-  text-decoration-line: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-  text-decoration-color: transparent;
-  transition:
-    color var(--duration-micro) ease,
-    text-decoration-color var(--duration-base) var(--ease-out-quint);
-}
-.link-soft:hover,
-.link-soft:focus-visible {
-  text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
-}
-
-/* Card: light/dark variants. Lifts a hair, picks up an accent border + tint. */
+/* ─── Cards and rows ─────────────────────────────────────────────────────── */
 .card-motion {
   transition:
     transform var(--duration-base) var(--ease-out-quint),
@@ -173,36 +263,117 @@ body {
     box-shadow var(--duration-base) ease;
 }
 .card-motion:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+}
+.card-motion-dark:hover {
+  border-color: rgba(168, 139, 255, 0.55);
+  box-shadow: 0 24px 60px -30px rgba(102, 51, 255, 0.6);
 }
 .card-motion-light:hover {
   border-color: color-mix(in srgb, var(--brand-accent) 35%, transparent);
-  box-shadow: 0 18px 40px -28px rgba(102, 51, 255, 0.35);
-}
-.card-motion-dark:hover {
-  border-color: color-mix(in srgb, var(--brand-accent) 50%, transparent);
-  background-color: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 18px 40px -26px rgba(102, 51, 255, 0.45);
 }
 
-/* Service card with interior arrow: the arrow nudges right on hover. */
-.service-arrow {
-  display: inline-block;
-  transition: transform var(--duration-base) var(--ease-out-quint);
+/* Index rows (service contents): a purple bar grows in from the left. */
+.index-row {
+  position: relative;
 }
-.group:hover .service-arrow,
-.group:focus-visible .service-arrow {
-  transform: translateX(3px);
+.index-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3px;
+  height: 0;
+  border-radius: 2px;
+  background: var(--brand-accent);
+  box-shadow: 0 0 14px rgba(102, 51, 255, 0.8);
+  transform: translateY(-50%);
+  transition: height var(--duration-base) var(--ease-out-quint);
+}
+.index-row:hover::before,
+.index-row:focus-visible::before {
+  height: 60%;
+}
+.index-row-label {
+  transition: transform var(--duration-base) var(--ease-out-quint), color var(--duration-micro) ease;
+}
+.index-row:hover .index-row-label,
+.index-row:focus-visible .index-row-label {
+  transform: translateX(14px);
 }
 
-/* Process step: number gets the accent treatment on hover. */
-.process-step .step-number {
-  transition: color var(--duration-base) ease;
+/* ─── Hero plan sheet: the four items tick themselves off on load ────────── */
+@keyframes feganTickDraw {
+  from { stroke-dashoffset: 24; }
+  to { stroke-dashoffset: 0; }
 }
-.process-step:hover .step-number {
-  color: color-mix(in srgb, var(--brand-accent) 55%, var(--color-border));
+@keyframes feganMarkIn {
+  0% { opacity: 0; transform: scale(0.4); }
+  70% { opacity: 1; transform: scale(1.15); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.plan-tick-circle {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: feganMarkIn 420ms var(--ease-out-quint) forwards;
+  animation-delay: calc(700ms + var(--i, 0) * 260ms);
+}
+.plan-tick-path {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: feganTickDraw 380ms var(--ease-out-quint) forwards;
+  animation-delay: calc(860ms + var(--i, 0) * 260ms);
 }
 
-/* Mobile menu choreography: drawer slide-in, backdrop fade. */
+/* ─── System flow schematics ────────────────────────────────────────────────
+   Live flows: a pulse of purple light travels along each connector in turn.
+   Planned flows: the dashes drift slowly, signalling work in progress. */
+.flow-live-line {
+  overflow: hidden;
+}
+.flow-live-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--brand-accent-soft), var(--brand-accent), transparent);
+  transform: translateX(-100%);
+  animation: feganFlowPulse 3.6s var(--ease-in-out-soft) infinite;
+  animation-delay: calc(var(--i, 0) * 0.6s);
+}
+.flow-live-line[data-axis="y"]::after {
+  background: linear-gradient(180deg, transparent, var(--brand-accent-soft), var(--brand-accent), transparent);
+  transform: translateY(-100%);
+  animation-name: feganFlowPulseY;
+}
+@keyframes feganFlowPulse {
+  0% { transform: translateX(-100%); }
+  45%, 100% { transform: translateX(100%); }
+}
+@keyframes feganFlowPulseY {
+  0% { transform: translateY(-100%); }
+  45%, 100% { transform: translateY(100%); }
+}
+.flow-node-live {
+  transition: box-shadow var(--duration-base) ease, transform var(--duration-base) var(--ease-out-quint);
+}
+.flow-step:hover .flow-node-live {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 4px rgba(102, 51, 255, 0.18);
+}
+.flow-end-glow {
+  box-shadow: 0 0 0 0 rgba(102, 51, 255, 0.55);
+  animation: feganEndGlow 3.6s ease-out infinite;
+  animation-delay: 1.8s;
+  border-radius: 9999px;
+}
+@keyframes feganEndGlow {
+  0% { box-shadow: 0 0 0 0 rgba(102, 51, 255, 0.55); }
+  60%, 100% { box-shadow: 0 0 0 10px rgba(102, 51, 255, 0); }
+}
+
+/* ─── Mobile menu ────────────────────────────────────────────────────────── */
 .mobile-backdrop {
   opacity: 0;
   transition: opacity var(--duration-base) var(--ease-in-out-soft);
@@ -231,7 +402,6 @@ body {
   transform: translate3d(0, 0, 0);
 }
 
-/* Hamburger morph: three lines smoothly form an X. */
 .hamburger-line {
   display: block;
   width: 22px;
@@ -253,7 +423,7 @@ body {
   transform: translateY(-7.5px) rotate(-45deg);
 }
 
-/* Form input: focus brings a soft accent ring + slight elevation. */
+/* ─── Contact form ───────────────────────────────────────────────────────── */
 .input-motion {
   transition:
     border-color var(--duration-micro) ease,
@@ -264,7 +434,6 @@ body {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-accent) 18%, transparent);
 }
 
-/* Success card pop-in for ContactForm. */
 @keyframes feganSuccessIn {
   from {
     opacity: 0;
@@ -278,25 +447,21 @@ body {
 .success-pop {
   animation: feganSuccessIn 480ms var(--ease-out-quint) both;
 }
-@keyframes feganTickDraw {
-  from { stroke-dashoffset: 24; }
-  to { stroke-dashoffset: 0; }
-}
 .success-tick {
   stroke-dasharray: 24;
   stroke-dashoffset: 24;
   animation: feganTickDraw 520ms var(--ease-out-quint) 220ms forwards;
 }
 
-/* "Currently building" badge: a soft, slow pulse around the status dot. */
+/* "Currently building": a slow pulse around the status dot. */
 @keyframes feganBadgePulse {
   0% {
     transform: scale(1);
-    opacity: 0.55;
+    opacity: 0.6;
   }
   70%,
   100% {
-    transform: scale(2.4);
+    transform: scale(2.6);
     opacity: 0;
   }
 }
@@ -304,7 +469,7 @@ body {
   animation: feganBadgePulse 2.4s var(--ease-out-quint) infinite;
 }
 
-/* Reduced motion:neutralise everything for users who opt out. */
+/* ─── Reduced motion: everything lands in its final, static state ────────── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -319,5 +484,14 @@ body {
   [data-reveal] {
     opacity: 1 !important;
     transform: none !important;
+  }
+  .badge-pulse,
+  .flow-live-line::after,
+  .glow-drift::before {
+    animation: none !important;
+  }
+  .badge-pulse,
+  .flow-live-line::after {
+    opacity: 0;
   }
 }

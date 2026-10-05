@@ -13,7 +13,7 @@ export const contentType = 'image/png'
 
 export default async function Image() {
   const logoData = await readFile(
-    join(process.cwd(), 'public/brand/fegan-digital-wordmark-white.png')
+    join(process.cwd(), 'public/brand/fegan-digital-wordmark-white-purple.png')
   )
   const logoSrc = `data:image/png;base64,${logoData.toString('base64')}`
 
@@ -28,17 +28,20 @@ export default async function Image() {
           alignItems: 'flex-start',
           justifyContent: 'center',
           backgroundColor: '#0d0d0c',
+          // The same soft purple glow used behind the site's dark sections.
+          backgroundImage:
+            'radial-gradient(circle at 85% 15%, rgba(102,51,255,0.38), rgba(102,51,255,0) 55%), radial-gradient(circle at 5% 100%, rgba(102,51,255,0.2), rgba(102,51,255,0) 45%)',
           padding: '80px',
           position: 'relative',
         }}
       >
-        {/* Wordmark. next/image is not supported inside ImageResponse. */}
+        {/* The original white + purple wordmark (1576 × 408). next/image is not supported inside ImageResponse. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={logoSrc}
           alt=""
-          width={280}
-          height={73}
+          width={300}
+          height={78}
           style={{ marginBottom: '52px', objectFit: 'contain' }}
         />
 

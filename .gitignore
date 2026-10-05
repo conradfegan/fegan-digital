@@ -41,3 +41,6 @@ yarn-error.log*
 next-env.d.ts
 
 .claude/
+
+# Claude skills installer lockfile (tooling only, not used by the site)
+skills-lock.json

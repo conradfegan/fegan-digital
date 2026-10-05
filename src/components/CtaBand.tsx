@@ -10,7 +10,7 @@ interface CtaBandProps {
   href?: string
 }
 
-/** Purple closing call to action used at the foot of each page. */
+/** The purple closing band, as on the original site, in the new two-column layout. */
 export default function CtaBand({
   title,
   text,
@@ -18,17 +18,28 @@ export default function CtaBand({
   href = '/contact',
 }: CtaBandProps) {
   return (
-    <section className="bg-accent py-20 md:py-28">
-      <Container>
-        <Reveal className="max-w-2xl mx-auto text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-semibold text-white tracking-tight leading-tight text-balance">
+    <section className="relative overflow-hidden bg-accent text-white">
+      {/* Soft light and shade inside the band. Decorative. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(50% 80% at 85% 0%, rgba(255,255,255,0.18), transparent 70%), radial-gradient(40% 70% at 0% 100%, rgba(13,13,12,0.28), transparent 70%)',
+        }}
+      />
+      <Container className="relative py-16 sm:py-20 lg:py-24">
+        <Reveal className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-16 lg:items-end">
+          <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-5xl font-semibold leading-[1.05] tracking-[-0.035em] text-white">
             {title}
           </h2>
-          <p className="mt-4 text-lg text-white/90 leading-relaxed">{text}</p>
-          <div className="mt-10">
-            <Button href={href} size="lg" variant="light">
-              {buttonText}
-            </Button>
+          <div>
+            <p className="text-lg md:text-xl leading-relaxed text-white/90">{text}</p>
+            <div className="mt-7">
+              <Button href={href} size="lg" variant="light" className="w-full sm:w-auto">
+                {buttonText}
+              </Button>
+            </div>
           </div>
         </Reveal>
       </Container>

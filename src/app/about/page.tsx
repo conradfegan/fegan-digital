@@ -5,8 +5,8 @@ import PageHeader from '@/components/PageHeader'
 import CtaBand from '@/components/CtaBand'
 import LinkedInLink from '@/components/LinkedInLink'
 import Button from '@/components/Button'
+import DocSection from '@/components/DocSection'
 import Reveal from '@/components/Reveal'
-import SectionHeading from '@/components/SectionHeading'
 import { siteConfig } from '@/lib/config'
 import { pageMetadata } from '@/lib/metadata'
 
@@ -69,32 +69,33 @@ export default function AboutPage() {
         intro="Fegan Digital was built to give businesses and organisations access to the kind of practical digital systems that used to be reserved for companies with large IT departments."
       />
 
-      {/* ── Founder section ── */}
-      <section className="py-20 md:py-28">
+      {/* ── Founder: a letter beside a framed print, on a light section ── */}
+      <section className="tone-light bg-paper text-ink py-16 sm:py-20 lg:py-24">
         <Container>
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
-            {/* Photo */}
-            <Reveal className="w-4/5 max-w-sm mx-auto md:mx-0 md:max-w-md">
-              <div className="rounded-xl overflow-hidden bg-surface-alt border border-border">
+          <div className="grid gap-10 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-14 lg:gap-20 md:items-start">
+            <Reveal as="div" className="md:sticky md:top-8">
+            <figure className="max-w-[17rem] sm:max-w-sm">
+              <div className="rounded-xl bg-sheet p-2.5 shadow-[0_24px_50px_-28px_rgba(102,51,255,0.55)] ring-1 ring-rule">
                 <Image
                   src="/images/conrad-photo-black.jpeg"
                   alt="Conrad Arthurs-Fegan, founder of Fegan Digital"
                   width={640}
                   height={730}
-                  sizes="(min-width: 768px) 448px, 80vw"
-                  className="w-full h-auto"
+                  sizes="(min-width: 768px) 384px, 272px"
+                  className="w-full h-auto rounded-lg"
                   priority
                 />
               </div>
+              <figcaption className="mt-3 text-sm text-ink-muted">Conrad Arthurs-Fegan, Founder</figcaption>
+            </figure>
             </Reveal>
 
-            {/* Bio */}
-            <Reveal delay={120}>
-              <h2 className="text-xs font-semibold uppercase tracking-widest text-ink-muted mb-4">
+            <Reveal delay={100} className="max-w-[40rem]">
+              <h2 className="text-sm font-semibold text-accent pt-3 border-t-2 border-accent">
                 Conrad Arthurs-Fegan, Founder
               </h2>
-              <div className="space-y-5 text-ink-muted leading-relaxed">
-                <p className="text-ink font-medium text-lg leading-relaxed">
+              <div className="mt-6 space-y-5 text-lg leading-relaxed text-ink-muted">
+                <p className="text-[1.375rem] sm:text-[1.625rem] font-medium leading-[1.35] tracking-[-0.015em] text-ink">
                   I founded Fegan Digital because I kept seeing the same pattern: businesses losing significant time and money to manual admin, with no straightforward path to fixing it.
                 </p>
                 <p>
@@ -107,7 +108,7 @@ export default function AboutPage() {
                   Every project ends with the same things: something that works, documentation you can follow, and the confidence to know what was built and why.
                 </p>
               </div>
-              <div className="mt-8 flex flex-col sm:flex-row gap-4">
+              <div className="mt-9 flex flex-col sm:flex-row gap-3">
                 <Button href="/contact">
                   {siteConfig.ctaText}
                 </Button>
@@ -120,79 +121,70 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* ── Values / How we work ── */}
-      <section className="bg-surface-alt py-20 md:py-28 border-y border-border">
-        <Container>
-          <Reveal>
-            <SectionHeading
-              label="How we work"
-              title="What working with Fegan Digital looks like."
-              subtitle="These aren't aspirational values. They're how every project actually runs."
-            />
-          </Reveal>
-          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {values.map((v, i) => (
-              <Reveal
-                as="li"
-                key={v.title}
-                delay={i * 70}
-                className="card-motion card-motion-light rounded-xl bg-white border border-border p-6"
-              >
-                <h3 className="font-semibold text-ink mb-2 text-sm">{v.title}</h3>
-                <p className="text-sm text-ink-muted leading-relaxed">{v.description}</p>
-              </Reveal>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {/* ── Service area ── */}
-      <section className="py-20 md:py-28">
-        <Container>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <Reveal>
-              <SectionHeading
-                label="Based in Newry"
-                title="Serving Ireland and the UK."
+      {/* ── How we work: a ruled list, not cards ── */}
+      <DocSection
+        note="How we work"
+        title="What working with Fegan Digital looks like."
+        intro="These aren't aspirational values. They're how every project actually runs."
+        glow
+      >
+        <ul className="mt-10 md:mt-12 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
+          {values.map((v, i) => (
+            <Reveal as="li" key={v.title} delay={(i % 3) * 80} className="group relative border-t border-white/15 pt-5 pb-8">
+              <span
+                aria-hidden="true"
+                className="absolute left-0 -top-px h-0.5 w-10 bg-accent transition-all duration-500 group-hover:w-full"
               />
-              <div className="space-y-4 text-ink-muted leading-relaxed">
-                <p>
-                  We&apos;re based in Newry, which puts us within easy reach of businesses across the island of Ireland and a short journey from much of the rest of the UK.
-                </p>
-                <p>
-                  For clients across Ireland, the discovery visit is in person: half a day on site, sitting with your team. For clients further afield in the UK, that visit can be done remotely or as a hybrid, depending on the scale of the project.
-                </p>
-                <p>
-                  All other communication (calls, progress updates and delivery) works well remotely, wherever you are.
-                </p>
-              </div>
+              <h3 className="text-lg font-semibold text-white">{v.title}</h3>
+              <p className="mt-2 leading-relaxed text-white/65">{v.description}</p>
             </Reveal>
-            <Reveal delay={140} className="rounded-xl border border-border bg-surface-alt p-6 sm:p-8">
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-ink-muted mb-5">
-                In brief
-              </h3>
-              <dl className="space-y-4">
-                {inBrief.map(([term, detail]) => (
-                  <div key={term} className="flex flex-col sm:grid sm:grid-cols-2 sm:gap-4 text-sm gap-0.5">
-                    <dt className="text-ink-muted font-medium">{term}</dt>
-                    <dd className="text-ink">{detail}</dd>
-                  </div>
-                ))}
-                <div className="flex flex-col sm:grid sm:grid-cols-2 sm:gap-4 text-sm gap-0.5">
-                  <dt className="text-ink-muted font-medium">LinkedIn</dt>
-                  <dd>
-                    <LinkedInLink
-                      label="Conrad Arthurs-Fegan"
-                      className="link-soft -my-3 inline-flex min-h-11 items-center gap-2 font-medium text-ink hover:text-accent"
-                      iconClassName="w-4 h-4 text-accent"
-                    />
-                  </dd>
+          ))}
+        </ul>
+      </DocSection>
+
+      {/* ── Service area, with a fact sheet ── */}
+      <DocSection tone="dark-raised" note="Based in Newry">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
+          <Reveal>
+            <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-[2.75rem] font-semibold leading-[1.08] tracking-[-0.03em] text-white">
+              Serving Ireland and the UK.
+            </h2>
+            <div className="mt-6 space-y-4 leading-relaxed text-white/70">
+              <p>
+                We&apos;re based in Newry, which puts us within easy reach of businesses across the island of Ireland and a short journey from much of the rest of the UK.
+              </p>
+              <p>
+                For clients across Ireland, the discovery visit is in person: half a day on site, sitting with your team. For clients further afield in the UK, that visit can be done remotely or as a hybrid, depending on the scale of the project.
+              </p>
+              <p>
+                All other communication (calls, progress updates and delivery) works well remotely, wherever you are.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={100} className="sheet tone-light rounded-xl p-6 sm:p-8 self-start">
+            <h3 className="text-base font-semibold text-ink">In brief</h3>
+            <dl className="mt-4 border-t-2 border-accent">
+              {inBrief.map(([term, detail]) => (
+                <div key={term} className="grid gap-0.5 border-b border-rule py-3 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-4">
+                  <dt className="text-sm text-ink-muted">{term}</dt>
+                  <dd className="text-[0.9375rem] text-ink break-words">{detail}</dd>
                 </div>
-              </dl>
-            </Reveal>
-          </div>
-        </Container>
-      </section>
+              ))}
+              <div className="grid gap-0.5 py-3 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-4">
+                <dt className="text-sm text-ink-muted">LinkedIn</dt>
+                <dd>
+                  <LinkedInLink
+                    label="Conrad Arthurs-Fegan"
+                    className="link-soft -my-3 inline-flex min-h-11 items-center gap-2 text-[0.9375rem] font-medium text-ink hover:text-accent"
+                    iconClassName="w-4 h-4 text-accent"
+                  />
+                </dd>
+              </div>
+            </dl>
+          </Reveal>
+        </div>
+      </DocSection>
 
       <CtaBand
         title="Want to find out if we can help?"
