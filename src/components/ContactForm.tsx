@@ -49,7 +49,7 @@ export default function ContactForm({ initialService }: ContactFormProps) {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
 
-    // Honeypot — bots fill every field; real users never see this one
+    // Honeypot: bots fill every field; real users never see this one
     if (honeypotRef.current?.value) return
 
     setStatus('submitting')
@@ -110,7 +110,7 @@ export default function ContactForm({ initialService }: ContactFormProps) {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
-      {/* Honeypot — hidden from real users, attracts bots */}
+      {/* Honeypot: hidden from real users, attracts bots */}
       <input
         ref={honeypotRef}
         type="text"
@@ -215,7 +215,7 @@ export default function ContactForm({ initialService }: ContactFormProps) {
       <div aria-live="assertive">
         {status === 'error' && (
           <p className="text-sm text-red-600" role="alert">
-            Something went wrong — please try again or email us directly.
+            Something went wrong. Please try again or email us directly.
           </p>
         )}
       </div>

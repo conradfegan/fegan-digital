@@ -2,6 +2,8 @@ import { ImageResponse } from 'next/og'
 import { readFile } from 'fs/promises'
 import { join } from 'path'
 
+export const alt = 'Fegan Digital: AI Automation and Digital Systems'
+
 export const size = {
   width: 1200,
   height: 630,
@@ -30,9 +32,11 @@ export default async function Image() {
           position: 'relative',
         }}
       >
-        {/* Wordmark */}
+        {/* Wordmark. next/image is not supported inside ImageResponse. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={logoSrc}
+          alt=""
           width={280}
           height={73}
           style={{ marginBottom: '52px', objectFit: 'contain' }}
@@ -49,19 +53,19 @@ export default async function Image() {
             maxWidth: '860px',
           }}
         >
-          AI Automation & Digital Systems
+          AI Automation and Digital Systems
         </div>
 
         {/* Subline */}
         <div
           style={{
             fontSize: '26px',
-            color: 'rgba(255,255,255,0.55)',
+            color: 'rgba(255,255,255,0.6)',
             lineHeight: '1.5',
-            maxWidth: '720px',
+            maxWidth: '760px',
           }}
         >
-          Practical systems for small businesses in Newry, Ireland & the UK.
+          Practical systems for businesses and organisations. Based in Newry, serving Ireland and the UK.
         </div>
 
         {/* Purple accent bar */}

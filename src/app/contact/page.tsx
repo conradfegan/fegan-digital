@@ -1,42 +1,20 @@
 import type { Metadata } from 'next'
 import Container from '@/components/Container'
+import PageHeader from '@/components/PageHeader'
+import { LinkedInIcon } from '@/components/LinkedInLink'
 import Reveal from '@/components/Reveal'
 import SectionHeading from '@/components/SectionHeading'
 import ContactForm from '@/components/ContactForm'
 import { siteConfig } from '@/lib/config'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Contact',
+  socialTitle: 'Contact | Fegan Digital | AI Automation & Digital Systems | Newry',
   description:
-    'Book a free 30-minute discovery call with Fegan Digital. No commitment, no sales pitch — just a conversation about your business and whether we can help. Based in Newry.',
-  alternates: {
-    canonical: '/contact',
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'en_GB',
-    siteName: 'Fegan Digital',
-    title: 'Contact | Fegan Digital | AI Automation & Digital Systems | Newry',
-    description:
-      'Book a free 30-minute discovery call with Fegan Digital. No commitment, no sales pitch — just a conversation about your business and whether we can help. Based in Newry.',
-    url: 'https://fegandigital.com/contact',
-    images: [
-      {
-        url: 'https://fegandigital.com/opengraph-image',
-        width: 1200,
-        height: 630,
-        alt: 'Fegan Digital — AI Automation & Digital Systems',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Contact | Fegan Digital | AI Automation & Digital Systems | Newry',
-    description:
-      'Book a free 30-minute discovery call with Fegan Digital. No commitment, no sales pitch — just a conversation about your business and whether we can help. Based in Newry.',
-    images: ['https://fegandigital.com/opengraph-image'],
-  },
-}
+    'Book a free 30-minute discovery call with Fegan Digital. No commitment and no sales pitch, just a conversation about your business and whether we can help. Based in Newry.',
+  path: '/contact',
+})
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 
@@ -45,22 +23,31 @@ const contactDetails = [
     label: 'Email',
     value: siteConfig.email,
     href: `mailto:${siteConfig.email}`,
+    external: false,
+  },
+  {
+    label: 'LinkedIn',
+    value: siteConfig.founderName,
+    href: siteConfig.linkedinUrl,
+    external: true,
   },
   {
     label: 'Based in',
     value: `${siteConfig.location}, Northern Ireland`,
     href: null,
+    external: false,
   },
   {
     label: 'Service area',
     value: siteConfig.serviceArea,
     href: null,
+    external: false,
   },
 ]
 
 const whatHappensNext = [
   "We'll be back to you within one working day to confirm receipt and suggest some times for a call.",
-  "We have a free 30-minute video or phone call — you tell us about your business, we ask questions, and we decide together if there's a good fit, and if an in person visit is needed.",
+  "We have a free 30-minute video or phone call. You tell us about your business, we ask questions, and we decide together if there's a good fit, and if an in person visit is needed.",
   "If there is, we'll arrange a half-day discovery visit (in person across Ireland; remote or hybrid further afield).",
   "Within 7 days of that visit, you'll receive a written findings document with specific recommendations and fixed prices.",
   "Nothing is committed until you say yes to the written proposal.",
@@ -74,28 +61,11 @@ export default async function ContactPage({
   const { service } = await searchParams
   return (
     <>
-      {/* ── Page header ── */}
-      <section className="bg-pitch text-white pt-12 pb-20 md:pt-16 md:pb-28">
-        <Container>
-          <div className="max-w-2xl">
-            <Reveal delay={0}>
-              <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-6">
-                Contact
-              </p>
-            </Reveal>
-            <Reveal delay={80}>
-              <h1 className="font-display text-4xl md:text-5xl font-semibold tracking-tight leading-tight text-white">
-                Book a free discovery call.
-              </h1>
-            </Reveal>
-            <Reveal delay={180}>
-              <p className="mt-5 text-lg text-white/70 leading-relaxed">
-                Start with a free 30-minute call — by video or phone. No sales pitch, no commitment. Just a conversation about your business and whether we can help.
-              </p>
-            </Reveal>
-          </div>
-        </Container>
-      </section>
+      <PageHeader
+        label="Contact"
+        title="Book a free discovery call."
+        intro="Start with a free 30-minute call by video or phone. No sales pitch and no commitment, just a conversation about your business and whether we can help."
+      />
 
       {/* ── Main contact section ── */}
       <section className="py-20 md:py-28">
@@ -116,19 +86,30 @@ export default async function ContactPage({
             <aside className="lg:col-span-2 space-y-10">
 
               {/* Contact details */}
-              <Reveal delay={140} className="rounded-lg border border-border bg-white p-7">
-                <h2 className="text-xs font-semibold uppercase tracking-widest text-ink-subtle mb-5">
+              <Reveal delay={140} className="rounded-xl border border-border bg-white p-6 sm:p-7">
+                <h2 className="text-xs font-semibold uppercase tracking-widest text-ink-muted mb-5">
                   Contact details
                 </h2>
                 <dl className="space-y-4">
-                  {contactDetails.map(({ label, value, href }) => (
+                  {contactDetails.map(({ label, value, href, external }) => (
                     <div key={label}>
-                      <dt className="text-xs text-ink-subtle mb-0.5">{label}</dt>
+                      <dt className="text-xs text-ink-muted mb-0.5">{label}</dt>
                       <dd className="text-sm font-medium text-ink">
-                        {href ? (
+                        {href && external ? (
                           <a
                             href={href}
-                            className="link-soft hover:text-accent"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="link-soft -my-3 inline-flex min-h-11 items-center gap-2 hover:text-accent"
+                          >
+                            <LinkedInIcon className="w-4 h-4 text-accent" />
+                            {value}
+                            <span className="sr-only"> on LinkedIn (opens in a new tab)</span>
+                          </a>
+                        ) : href ? (
+                          <a
+                            href={href}
+                            className="link-soft -my-3 inline-flex min-h-11 items-center hover:text-accent"
                           >
                             {value}
                           </a>
@@ -142,7 +123,7 @@ export default async function ContactPage({
               </Reveal>
 
               {/*
-               * BOOKING WIDGET — hidden until a real Calendly link exists.
+               * BOOKING WIDGET: hidden until a real Calendly link exists.
                *
                * When ready to enable inline booking on this page:
                * 1. Create a Calendly account at calendly.com
@@ -170,7 +151,7 @@ export default async function ContactPage({
 
               {/* What happens next */}
               <Reveal delay={220}>
-                <h2 className="text-xs font-semibold uppercase tracking-widest text-ink-subtle mb-5">
+                <h2 className="text-xs font-semibold uppercase tracking-widest text-ink-muted mb-5">
                   What happens after you enquire
                 </h2>
                 <ol className="space-y-4">

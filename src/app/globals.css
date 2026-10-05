@@ -9,7 +9,7 @@
   --brand-accent-hover: #5522ee;
   --brand-accent-light: #ede8ff;
 
-  /* Motion tokens — tuned for a sleek, professional, SaaS-grade feel. */
+  /* Motion tokens: tuned for a sleek, professional, SaaS-grade feel. */
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
@@ -20,22 +20,26 @@
 
 /* ─── Tailwind v4 theme tokens ───────────────────────────────────────────── */
 @theme inline {
-  /* Accent — driven by :root variables above. Fallbacks ensure colour resolves
+  /* Accent: driven by :root variables above. Fallbacks ensure colour resolves
      even if the var() chain has an unexpected cascade issue in the browser. */
   --color-accent: var(--brand-accent, #6633ff);
   --color-accent-hover: var(--brand-accent-hover, #5522ee);
   --color-accent-light: var(--brand-accent-light, #ede8ff);
+  /* Lighter purple for small text on the near-black background. The brand
+     purple alone is 3.2:1 on pitch, which fails WCAG AA for body text. */
+  --color-accent-on-dark: #a88bff;
 
   /* Neutrals */
   --color-surface: #f9fafb;
   --color-surface-alt: #f1f3f5;
   --color-border: #e5e7eb;
   --color-ink: #111827;
-  --color-ink-muted: #6b7280;
-  --color-ink-subtle: #9ca3af;
+  /* Both muted tones meet WCAG AA (4.5:1) on white and surface-alt. */
+  --color-ink-muted: #4b5563;
+  --color-ink-subtle: #6b7280;
   --color-pitch: #0d0d0c;
 
-  /* Fonts — mapped from Next.js font variables */
+  /* Fonts: mapped from Next.js font variables */
   --font-sans: var(--font-inter);
   --font-display: var(--font-geist-sans);
 }
@@ -43,6 +47,21 @@
 /* ─── Base ───────────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
+}
+
+/* Visible keyboard focus everywhere. Components that draw their own ring
+   (buttons, inputs) opt out with focus-visible:outline-none. Kept in the
+   base layer so Tailwind utilities can override it. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--brand-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .bg-pitch :focus-visible,
+  .bg-accent :focus-visible {
+    outline-color: #ffffff;
+  }
 }
 
 body {
@@ -82,7 +101,7 @@ body {
   transform: none;
 }
 
-/* Button — subtle lift on hover, snappy press. Used by all variants. */
+/* Button: subtle lift on hover, snappy press. Used by all variants. */
 .btn-motion {
   transition:
     transform var(--duration-micro) var(--ease-out-quint),
@@ -105,7 +124,7 @@ body {
   box-shadow: 0 8px 22px -10px rgba(255, 255, 255, 0.25);
 }
 
-/* Animated underline for nav links — purple accent slides in from the left. */
+/* Animated underline for nav links: purple accent slides in from the left. */
 .nav-link {
   position: relative;
   transition: color var(--duration-micro) ease;
@@ -115,7 +134,7 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -6px;
+  bottom: 6px;
   height: 1px;
   background: var(--brand-accent);
   transform: scaleX(0);
@@ -128,32 +147,24 @@ body {
   transform: scaleX(1);
 }
 
-/* Subtle hover for footer + body links that aren't full nav items. */
+/* Subtle hover for footer + body links that aren't full nav items.
+   Uses text-decoration so the underline hugs the text even when the link
+   box is padded out to a 44px tap target. */
 .link-soft {
-  position: relative;
-  transition: color var(--duration-micro) ease;
-}
-.link-soft::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  opacity: 0;
-  transform: translateY(-1px);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-decoration-color: transparent;
   transition:
-    opacity var(--duration-micro) ease,
-    transform var(--duration-base) var(--ease-out-quint);
+    color var(--duration-micro) ease,
+    text-decoration-color var(--duration-base) var(--ease-out-quint);
 }
-.link-soft:hover::after,
-.link-soft:focus-visible::after {
-  opacity: 0.5;
-  transform: translateY(0);
+.link-soft:hover,
+.link-soft:focus-visible {
+  text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
 }
 
-/* Card — light/dark variants. Lifts a hair, picks up an accent border + tint. */
+/* Card: light/dark variants. Lifts a hair, picks up an accent border + tint. */
 .card-motion {
   transition:
     transform var(--duration-base) var(--ease-out-quint),
@@ -173,7 +184,7 @@ body {
   background-color: rgba(255, 255, 255, 0.07);
 }
 
-/* Service card with interior arrow — the arrow nudges right on hover. */
+/* Service card with interior arrow: the arrow nudges right on hover. */
 .service-arrow {
   display: inline-block;
   transition: transform var(--duration-base) var(--ease-out-quint);
@@ -183,7 +194,7 @@ body {
   transform: translateX(3px);
 }
 
-/* Process step — number gets the accent treatment on hover. */
+/* Process step: number gets the accent treatment on hover. */
 .process-step .step-number {
   transition: color var(--duration-base) ease;
 }
@@ -191,7 +202,7 @@ body {
   color: color-mix(in srgb, var(--brand-accent) 55%, var(--color-border));
 }
 
-/* Mobile menu choreography — drawer slide-in, backdrop fade. */
+/* Mobile menu choreography: drawer slide-in, backdrop fade. */
 .mobile-backdrop {
   opacity: 0;
   transition: opacity var(--duration-base) var(--ease-in-out-soft);
@@ -220,7 +231,7 @@ body {
   transform: translate3d(0, 0, 0);
 }
 
-/* Hamburger morph — three lines smoothly form an X. */
+/* Hamburger morph: three lines smoothly form an X. */
 .hamburger-line {
   display: block;
   width: 22px;
@@ -242,7 +253,7 @@ body {
   transform: translateY(-7.5px) rotate(-45deg);
 }
 
-/* Form input — focus brings a soft accent ring + slight elevation. */
+/* Form input: focus brings a soft accent ring + slight elevation. */
 .input-motion {
   transition:
     border-color var(--duration-micro) ease,
@@ -277,7 +288,23 @@ body {
   animation: feganTickDraw 520ms var(--ease-out-quint) 220ms forwards;
 }
 
-/* Reduced motion — neutralise everything for users who opt out. */
+/* "Currently building" badge: a soft, slow pulse around the status dot. */
+@keyframes feganBadgePulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+.badge-pulse {
+  animation: feganBadgePulse 2.4s var(--ease-out-quint) infinite;
+}
+
+/* Reduced motion:neutralise everything for users who opt out. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

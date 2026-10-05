@@ -4,6 +4,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { siteConfig } from '@/lib/config'
+import { defaultTitle, ogImageAlt } from '@/lib/metadata'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -17,39 +19,37 @@ const geistSans = Geist({
   display: 'swap',
 })
 
-const baseUrl = 'https://fegandigital.com'
+const defaultDescription =
+  'Practical AI automation and digital systems for businesses and organisations that want to stop wasting time on admin. Based in Newry, serving Ireland and the UK.'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: 'Fegan Digital | AI Automation & Digital Systems | Newry',
-    template: '%s | Fegan Digital | AI Automation & Digital Systems | Newry',
+    default: defaultTitle,
+    template: `%s | ${defaultTitle}`,
   },
-  description:
-    'Practical AI automation and digital systems for small businesses. Cut admin, recover revenue, and run more efficiently. Based in Newry, serving Ireland and the UK.',
+  description: defaultDescription,
   openGraph: {
     type: 'website',
     locale: 'en_GB',
-    url: baseUrl,
-    siteName: 'Fegan Digital',
-    title: 'Fegan Digital | AI Automation & Digital Systems | Newry',
-    description:
-      'Practical AI automation and digital systems for small businesses. Based in Newry, serving Ireland and the UK.',
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: defaultTitle,
+    description: defaultDescription,
     images: [
       {
-        url: 'https://fegandigital.com/opengraph-image',
+        url: `${siteConfig.url}/opengraph-image`,
         width: 1200,
         height: 630,
-        alt: 'Fegan Digital — AI Automation & Digital Systems',
+        alt: ogImageAlt,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fegan Digital | AI Automation & Digital Systems | Newry',
-    description:
-      'Practical AI automation and digital systems for small businesses. Based in Newry, serving Ireland and the UK.',
-    images: ['https://fegandigital.com/opengraph-image'],
+    title: defaultTitle,
+    description: defaultDescription,
+    images: [{ url: `${siteConfig.url}/opengraph-image`, alt: ogImageAlt }],
   },
   robots: {
     index: true,

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Container from './Container'
 import Reveal from './Reveal'
+import LinkedInLink from './LinkedInLink'
 import { siteConfig } from '@/lib/config'
 
 const footerNav = [
@@ -17,6 +18,7 @@ const footerNav = [
   {
     heading: 'Company',
     links: [
+      { label: 'Work', href: '/work' },
       { label: 'About', href: '/about' },
       { label: 'Contact', href: '/contact' },
       { label: 'Privacy', href: '/privacy' },
@@ -28,15 +30,15 @@ export default function Footer() {
   return (
     <footer className="bg-pitch text-white/80">
       <Container>
-        <Reveal as="div" className="py-14 grid md:grid-cols-4 gap-10">
+        <Reveal as="div" className="py-14 grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
           {/* Brand column */}
-          <div className="md:col-span-2">
+          <div className="col-span-2">
             <Link
               href="/"
-              aria-label="Fegan Digital — home"
+              aria-label="Fegan Digital home"
               className="inline-flex transition-opacity duration-200 hover:opacity-85"
             >
-              {/* Plain white wordmark — subdued and clean on the dark footer */}
+              {/* Plain white wordmark: subdued and clean on the dark footer */}
               <Image
                 src="/brand/fegan-digital-wordmark-white.png"
                 alt="Fegan Digital"
@@ -45,32 +47,37 @@ export default function Footer() {
                 className="h-7 w-auto mb-4"
               />
             </Link>
-            <p className="text-sm text-white/60 leading-relaxed max-w-xs">
+            <p className="text-sm text-white/65 leading-relaxed max-w-xs">
               Modern systems for growing businesses
             </p>
-            <p className="mt-4 text-sm text-white/50">
+            <p className="mt-4 text-sm text-white/60">
               Based in {siteConfig.location}.
             </p>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="link-soft mt-1 inline-block text-sm text-white/60 hover:text-white"
-            >
-              {siteConfig.email}
-            </a>
+            <div className="mt-1 flex items-center gap-2">
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="link-soft inline-flex min-h-11 items-center text-sm text-white/65 hover:text-white"
+              >
+                {siteConfig.email}
+              </a>
+              <LinkedInLink
+                className="inline-flex w-11 h-11 items-center justify-center rounded-md text-white/65 transition-colors hover:text-white hover:bg-white/10"
+              />
+            </div>
           </div>
 
           {/* Nav columns */}
           {footerNav.map((group) => (
             <div key={group.heading}>
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">
+              <h2 className="text-xs font-semibold uppercase tracking-widest text-white/55 mb-2">
                 {group.heading}
-              </h3>
-              <ul className="space-y-2.5">
+              </h2>
+              <ul>
                 {group.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="link-soft text-sm text-white/60 hover:text-white"
+                      className="link-soft inline-flex min-h-11 items-center text-sm text-white/65 hover:text-white md:min-h-9"
                     >
                       {link.label}
                     </Link>
@@ -81,7 +88,7 @@ export default function Footer() {
           ))}
         </Reveal>
 
-        <div className="border-t border-white/10 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/30">
+        <div className="border-t border-white/10 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/55">
           <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
           <p>Serving {siteConfig.serviceArea}</p>
         </div>

@@ -39,7 +39,7 @@ export default function Reveal({
 }: RevealProps) {
   // Polymorphic `as` over a union of intrinsic tags makes the JSX prop type
   // an intersection of every tag's props, which TS cannot represent. The
-  // runtime contract is fine — render through `any`-typed Tag.
+  // runtime contract is fine, so render through `any`-typed Tag.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Tag: ElementType = (as ?? 'div') as any
   const ref = useRef<HTMLElement | null>(null)

@@ -18,18 +18,18 @@ export default function SectionHeading({
   const isCenter = align === 'center'
 
   return (
-    <div className={`mb-12 ${isCenter ? 'text-center' : 'text-left'} ${className}`}>
+    <div className={`mb-10 md:mb-12 ${isCenter ? 'text-center' : 'text-left'} ${className}`}>
       {label && (
         <p
           className={`text-xs font-semibold uppercase tracking-widest mb-3 ${
-            light ? 'text-white/50' : 'text-ink-muted'
+            light ? 'text-white/60' : 'text-ink-muted'
           }`}
         >
           {label}
         </p>
       )}
       <h2
-        className={`text-3xl md:text-4xl font-semibold tracking-tight leading-tight ${
+        className={`font-display text-3xl md:text-4xl font-semibold tracking-tight leading-tight text-balance ${
           light ? 'text-white' : 'text-ink'
         }`}
       >
@@ -38,7 +38,7 @@ export default function SectionHeading({
       {subtitle && (
         <p
           className={`mt-4 text-lg leading-relaxed ${
-            light ? 'text-white/70' : 'text-ink-muted'
+            light ? 'text-white/75' : 'text-ink-muted'
           } ${isCenter ? 'max-w-2xl mx-auto' : 'max-w-2xl'}`}
         >
           {subtitle}

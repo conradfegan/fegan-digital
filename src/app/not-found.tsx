@@ -1,28 +1,18 @@
 import Container from '@/components/Container'
 import Button from '@/components/Button'
+import PageHeader from '@/components/PageHeader'
 
 export default function NotFound() {
   return (
     <>
-      {/* Dark header section — matches other page headers */}
-      <section className="bg-pitch text-white pt-12 pb-20 md:pt-16 md:pb-28">
-        <Container>
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-6">
-              404
-            </p>
-            <h1 className="font-display text-4xl md:text-5xl font-semibold tracking-tight leading-tight text-white mb-5">
-              Page not found.
-            </h1>
-            <p className="text-lg text-white/70 leading-relaxed">
-              The page you were looking for doesn&apos;t exist or may have moved.
-            </p>
-          </div>
-        </Container>
-      </section>
+      <PageHeader
+        label="404"
+        title="Page not found."
+        intro="The page you were looking for doesn't exist or may have moved."
+      />
 
       {/* Body */}
-      <section className="py-16 md:py-24">
+      <section className="py-20 md:py-28">
         <Container>
           <div className="max-w-lg">
             <p className="text-ink-muted leading-relaxed mb-8">

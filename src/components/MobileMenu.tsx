@@ -12,7 +12,7 @@ type Mode = 'closed' | 'opening' | 'open' | 'closing'
 export default function MobileMenu() {
   // Single state machine: closed → opening → open → closing → closed.
   // The intermediate "opening" frame lets CSS pick up the transition before
-  // we flip to "open" — guarantees the slide animation plays both directions.
+  // we flip to "open", which guarantees the slide animation plays both directions.
   const [mode, setMode] = useState<Mode>('closed')
 
   const isMounted = mode !== 'closed'
@@ -67,7 +67,7 @@ export default function MobileMenu() {
 
   return (
     <div className="md:hidden">
-      {/* Hamburger — three lines that morph into an X when open */}
+      {/* Hamburger: three lines that morph into an X when open */}
       <button
         type="button"
         aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -103,7 +103,7 @@ export default function MobileMenu() {
               type="button"
               aria-label="Close navigation menu"
               onClick={close}
-              className="absolute top-5 right-5 p-2 rounded-md text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+              className="absolute top-3 right-3 inline-flex w-11 h-11 items-center justify-center rounded-md text-white/60 hover:text-white hover:bg-white/10 transition-colors"
             >
               <svg
                 width="20"
@@ -124,7 +124,7 @@ export default function MobileMenu() {
               className="mobile-drawer-link mb-8"
               style={{ ['--drawer-link-delay' as string]: '60ms' }}
             >
-              <Link href="/" onClick={close} aria-label="Fegan Digital — home">
+              <Link href="/" onClick={close} aria-label="Fegan Digital home" className="inline-flex">
                 <Image
                   src="/brand/fegan-digital-wordmark-white-purple.png"
                   alt="Fegan Digital"

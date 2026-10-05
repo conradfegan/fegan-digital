@@ -1,69 +1,29 @@
 import type { Metadata } from 'next'
 import Container from '@/components/Container'
+import PageHeader from '@/components/PageHeader'
 import Reveal from '@/components/Reveal'
 import { siteConfig } from '@/lib/config'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Privacy Policy',
+  socialTitle: 'Privacy Policy | Fegan Digital | AI Automation & Digital Systems | Newry',
   description:
     'How Fegan Digital handles personal information collected from website enquiries and client work. A plain-English summary of what we collect, why, and your rights.',
-  alternates: {
-    canonical: '/privacy',
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'en_GB',
-    siteName: 'Fegan Digital',
-    title: 'Privacy Policy | Fegan Digital | AI Automation & Digital Systems | Newry',
-    description:
-      'How Fegan Digital handles personal information collected from website enquiries and client work. A plain-English summary of what we collect, why, and your rights.',
-    url: 'https://fegandigital.com/privacy',
-    images: [
-      {
-        url: 'https://fegandigital.com/opengraph-image',
-        width: 1200,
-        height: 630,
-        alt: 'Fegan Digital — AI Automation & Digital Systems',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Privacy Policy | Fegan Digital | AI Automation & Digital Systems | Newry',
-    description:
-      'How Fegan Digital handles personal information collected from website enquiries and client work. A plain-English summary of what we collect, why, and your rights.',
-    images: ['https://fegandigital.com/opengraph-image'],
-  },
-}
+  path: '/privacy',
+})
 
 export default function PrivacyPage() {
   return (
     <>
-      {/* ── Page header ── */}
-      <section className="bg-pitch text-white py-12 md:py-28">
-        <Container>
-          <div className="max-w-2xl">
-            <Reveal delay={0}>
-              <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-6">
-                Privacy
-              </p>
-            </Reveal>
-            <Reveal delay={80}>
-              <h1 className="font-display text-4xl md:text-5xl font-semibold tracking-tight leading-tight text-white">
-                How we handle your information.
-              </h1>
-            </Reveal>
-            <Reveal delay={180}>
-              <p className="mt-5 text-lg text-white/70 leading-relaxed">
-                A short, plain-English summary of what we collect, why, and what you can ask us to do with it.
-              </p>
-            </Reveal>
-          </div>
-        </Container>
-      </section>
+      <PageHeader
+        label="Privacy"
+        title="How we handle your information."
+        intro="A short, plain-English summary of what we collect, why, and what you can ask us to do with it."
+      />
 
       {/* ── Body ── */}
-      <section className="py-12 md:py-28">
+      <section className="py-20 md:py-28">
         <Container>
           <div className="max-w-3xl space-y-10 text-ink-muted leading-relaxed">
 
@@ -81,7 +41,7 @@ export default function PrivacyPage() {
             <Reveal>
               <h2 className="text-xl font-semibold text-ink mb-3">What we collect</h2>
               <p className="mb-3">
-                When you submit the contact form or email us directly, we receive the details you provide — typically your name, email address, business name, and a description of what you&apos;re looking for help with.
+                When you submit the contact form or email us directly, we receive the details you provide: typically your name, email address, business name, and a description of what you&apos;re looking for help with.
               </p>
               <p>
                 During paid client work, we may also handle business information you share with us as part of discovery and delivery (for example, details of your existing systems, processes, and data).
