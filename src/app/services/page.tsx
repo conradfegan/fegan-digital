@@ -15,69 +15,82 @@ export const metadata: Metadata = pageMetadata({
   path: '/services',
 })
 
-const automationExamples = [
+const approach = [
   {
-    title: 'Renewal tracking and expiry reminders',
-    description:
-      'Automatically monitor expiry dates for contracts, certifications, subscriptions or policies, and send reminders at the right time, every time.',
+    title: 'Bespoke, not off the shelf.',
+    text: 'Built around how your business actually operates. No software licences to sell.',
   },
   {
-    title: 'Automated quote and proposal generation',
-    description:
-      'Generate professional, accurate quotes from your existing data without manual formatting or copy-paste errors.',
+    title: 'Discovery first.',
+    text: 'We sit with your team, then give you written recommendations with time and revenue estimates and fixed prices. Nothing is built until you say yes.',
   },
   {
-    title: 'Intelligent email triage and response drafting',
-    description:
-      'Route, label and draft responses to incoming emails based on content, so nothing gets missed and the right person sees the right message.',
+    title: 'Built to last.',
+    text: 'Established, maintainable tools, not experimental technology.',
+  },
+]
+
+// All nine automation ideas, grouped so the list scans quickly.
+const automationGroups = [
+  {
+    title: 'Reminders and follow-ups',
+    items: [
+      'Renewal and expiry reminders',
+      'Compliance deadline monitoring',
+      'Email triage and reply drafting',
+    ],
   },
   {
-    title: 'Document and certificate generation',
-    description:
-      'Produce completed documents automatically from structured data. No more manual template filling.',
+    title: 'Documents and reports',
+    items: [
+      'Quotes and proposals',
+      'Documents and certificates',
+      'Reporting dashboards',
+    ],
   },
   {
-    title: 'CRM and booking system integrations',
-    description:
-      'Connect your CRM, booking system or scheduling tool to the rest of your business so data flows without manual intervention.',
-  },
-  {
-    title: 'Expiry and compliance monitoring',
-    description:
-      'Stay on top of compliance deadlines, certification renewals and regulatory requirements automatically.',
-  },
-  {
-    title: 'Automated reporting dashboards',
-    description:
-      'Pull data from across your systems into clean, accurate reports, ready when you need them, without anyone building them manually.',
-  },
-  {
-    title: 'Data migration between systems',
-    description:
-      'Move and transform data between platforms reliably, without the copy-paste errors that come with manual migration.',
-  },
-  {
-    title: 'Copy-paste admin elimination',
-    description:
-      'Remove the repetitive copying of information between spreadsheets, emails and systems.',
+    title: 'Connected systems',
+    items: [
+      'CRM and booking integrations',
+      'Data migration between systems',
+      'An end to copy-paste admin',
+    ],
   },
 ]
 
 const whatYouGet = [
-  { title: 'A working system', description: 'Built, tested, and live in your business.' },
-  { title: 'Written documentation', description: 'So you understand what was built and why.' },
-  { title: 'A clean handover', description: 'You are not left guessing how the system works.' },
-  { title: 'Ongoing support', description: 'Optional support if you want help maintaining and improving it.' },
+  { title: 'A working system', text: 'built, tested and live' },
+  { title: 'Written documentation', text: 'what was built and why' },
+  { title: 'A clean handover', text: 'no guessing how it works' },
+  { title: 'Ongoing support', text: 'optional, to maintain and improve it' },
 ]
 
 const outcomes = [
-  'Stop staff spending hours on admin that could run automatically',
-  'Recover revenue lost to missed renewals and follow-ups',
-  'Reduce errors that come from manual data entry',
-  'Get consistent, reliable follow-up without anyone having to remember',
-  'Better visibility into your business with automated reports',
-  'Free your team to focus on work that actually needs a human',
+  'Less staff time on admin that could run itself',
+  'Fewer missed renewals and follow-ups',
+  'Fewer manual data entry errors',
+  'Reliable follow-up without anyone remembering',
+  'Clearer visibility through automated reports',
+  'More time for work that needs a person',
 ]
+
+function CheckIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      className="flex-shrink-0 text-accent mt-0.5"
+      aria-hidden="true"
+    >
+      <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.5" />
+      <polyline points="5,8 7,9.5 11,6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+const listHeading = 'text-xs font-semibold uppercase tracking-widest text-ink-muted mb-4'
 
 export default function ServicesPage() {
   return (
@@ -93,103 +106,87 @@ export default function ServicesPage() {
         <Container>
           <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
 
-            {/* Left: explanation + CTA */}
+            {/* Left: what it is and how we work */}
             <Reveal className="lg:col-span-2">
               <SectionHeading
                 label="Primary service"
                 title="AI Automation & Workflow Systems"
-                subtitle="Custom automations that connect your existing systems and remove repetitive admin, so work happens automatically instead of manually."
+                subtitle="Automations that connect your existing systems and remove repetitive admin."
+                className="md:mb-8"
               />
-              <p className="mb-6 border-l-2 border-accent pl-4 text-ink font-medium leading-relaxed">
+              <p className="mb-8 border-l-2 border-accent pl-4 text-ink font-medium leading-relaxed">
                 We start with the tools you already have, and only recommend something new when it earns its place.
               </p>
-              <div className="space-y-4 text-ink-muted leading-relaxed">
-                <p>
-                  We don&apos;t sell off-the-shelf software licences. We build bespoke automations tailored to how your business actually operates.
-                </p>
-                <p>
-                  Every engagement starts with a proper discovery: sitting with your team, watching how the business runs, and identifying where time and money are being lost. The result is a written recommendations document with specific fixes, time and revenue estimates, and fixed prices. Nothing is built until you say yes.
-                </p>
-                <p>
-                  Automations are built to be robust and maintainable. We use established tools and platforms, not experimental technology that might break in six months.
-                </p>
-              </div>
-
-              {/* What you get */}
+              <ul className="space-y-4">
+                {approach.map((point) => (
+                  <li key={point.title} className="flex items-start gap-3 leading-relaxed">
+                    <CheckIcon />
+                    <p className="text-ink-muted">
+                      <span className="font-semibold text-ink">{point.title}</span> {point.text}
+                    </p>
+                  </li>
+                ))}
+              </ul>
               <div className="mt-10">
-                <h3 className="text-xs font-semibold uppercase tracking-widest text-ink-muted mb-4">
-                  What you get
-                </h3>
-                <ul className="grid sm:grid-cols-2 gap-3">
-                  {whatYouGet.map((item) => (
-                    <li key={item.title} className="rounded-xl border border-border bg-white p-4">
-                      <p className="font-semibold text-ink text-sm">{item.title}</p>
-                      <p className="text-sm text-ink-muted mt-1 leading-snug">{item.description}</p>
-                    </li>
-                  ))}
-                </ul>
+                <Button href="/contact?service=automation" size="md" className="w-full sm:w-auto">
+                  Discuss an automation project
+                </Button>
               </div>
             </Reveal>
 
-            {/* Right: examples + outcomes */}
-            <div className="lg:col-span-3">
-              <Reveal>
-                <h3 className="text-xs font-semibold uppercase tracking-widest text-ink-muted mb-6">
-                  What can be automated
-                </h3>
-              </Reveal>
-              <ul className="grid sm:grid-cols-2 gap-4">
-                {automationExamples.map((item, i) => (
-                  <Reveal
-                    as="li"
-                    key={item.title}
-                    delay={i * 60}
-                    className="card-motion card-motion-light rounded-xl border border-border bg-white p-5 sm:last:odd:col-span-2"
-                  >
-                    <h4 className="font-semibold text-ink text-sm mb-2 leading-snug">
-                      {item.title}
-                    </h4>
-                    <p className="text-sm text-ink-muted leading-relaxed">
-                      {item.description}
-                    </p>
-                  </Reveal>
-                ))}
-              </ul>
-
-              {/* Outcomes: connected directly below the examples */}
-              <Reveal className="mt-6 pt-6 border-t border-border">
-                <h3 className="text-xs font-semibold uppercase tracking-widest text-ink-muted mb-4">
-                  What you can expect
-                </h3>
-                <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
-                  {outcomes.map((o, i) => (
+            {/* Right: what can be automated, what you get, what to expect */}
+            <div className="lg:col-span-3 space-y-10">
+              <div>
+                <Reveal>
+                  <h3 className={listHeading}>What can be automated</h3>
+                </Reveal>
+                <ul className="grid md:grid-cols-3 gap-4">
+                  {automationGroups.map((group, i) => (
                     <Reveal
                       as="li"
-                      key={o}
-                      delay={i * 60}
-                      className="flex items-start gap-2.5 text-sm text-ink-muted"
+                      key={group.title}
+                      delay={i * 70}
+                      className="card-motion card-motion-light rounded-xl border border-border bg-white p-5"
                     >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        className="flex-shrink-0 text-accent mt-0.5"
-                        aria-hidden="true"
-                      >
-                        <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" />
-                        <polyline points="5,8 7,10 11,6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      {o}
+                      <h4 className="font-semibold text-ink text-sm mb-3">{group.title}</h4>
+                      <ul className="space-y-2">
+                        {group.items.map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-sm text-ink-muted leading-snug">
+                            <span className="mt-[7px] w-1 h-1 rounded-full bg-accent flex-shrink-0" aria-hidden="true" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
                     </Reveal>
                   ))}
                 </ul>
-              </Reveal>
+              </div>
 
-              <Reveal className="mt-6 flex justify-center md:justify-start">
-                <Button href="/contact?service=automation" size="md">
-                  Discuss an automation project
-                </Button>
+              <Reveal className="grid sm:grid-cols-2 gap-10 border-t border-border pt-10">
+                <div>
+                  <h3 className={listHeading}>What you get</h3>
+                  <ul className="space-y-2.5">
+                    {whatYouGet.map((item) => (
+                      <li key={item.title} className="flex items-start gap-2.5 text-sm leading-snug">
+                        <CheckIcon />
+                        <span className="text-ink-muted">
+                          <span className="font-semibold text-ink">{item.title}</span>, {item.text}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className={listHeading}>What you can expect</h3>
+                  <ul className="space-y-2.5">
+                    {outcomes.map((o) => (
+                      <li key={o} className="flex items-start gap-2.5 text-sm text-ink-muted leading-snug">
+                        <CheckIcon />
+                        {o}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </Reveal>
             </div>
 
